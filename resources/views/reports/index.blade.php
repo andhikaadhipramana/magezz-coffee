@@ -4,7 +4,7 @@
 @section('subtitle', 'Analisis penjualan periode ' . $start->format('d/m/Y') . ' - ' . $end->format('d/m/Y'))
 
 @section('content')
-    <div class="card mb-3">
+    <div class="card mb-3 d-print-none">
         <div class="card-body pb-2">
             <form method="GET" class="row g-2">
                 <div class="col-md-3">
@@ -41,6 +41,21 @@
                 </div>
             </form>
         </div>
+    </div>
+
+    <div class="mz-print-head">
+        <div class="mz-print-head__brand">{{ \App\Models\Setting::get('outlet_name', 'Magezz Coffee') }}</div>
+        <div class="mz-print-head__title">Laporan Penjualan</div>
+        <div class="mz-print-head__meta">
+            Periode {{ $start->format('d/m/Y') }} &ndash; {{ $end->format('d/m/Y') }}
+            &middot; Dicetak {{ now()->format('d/m/Y H:i') }}
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end mb-2 d-print-none">
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.print()">
+            <i class="bi bi-printer me-1"></i> Cetak Laporan
+        </button>
     </div>
 
     <div class="row g-3 mb-3">

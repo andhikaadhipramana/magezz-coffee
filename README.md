@@ -30,12 +30,12 @@ Dibangun dengan **Laravel 12 + MySQL**, sesuai PRD Magezz Coffee (Fase 1: POS + 
 |---|---|
 | **Autentikasi & Peran** | Login, logout, pembatasan akses berdasarkan peran (Manager / Kasir), serta lockout 5 menit setelah 3 percobaan gagal (eskalasi kelipatan 5 menit, maksimal 60 menit) |
 | **Dashboard** | Ringkasan omzet harian & bulanan, item terjual, grafik penjualan 7 hari, produk terlaris |
-| **Kasir (POS)** | Katalog menu dengan pencarian & filter kategori, keranjang, varian (suhu, ukuran, level gula, extra shot, susu, topping), diskon persen/nominal, pajak PB1, multi-metode pembayaran, struk cetak |
+| **Kasir (POS)** | Katalog menu dengan pencarian & filter kategori, keranjang, varian (suhu, ukuran, level gula, extra shot, susu, topping), diskon persen/nominal, pajak PB1, multi-metode pembayaran, struk cetak thermal 80 mm |
 | **Transaksi** | Riwayat transaksi, filter, detail, cetak struk, dan void (pembatalan) dengan catatan alasan, pelaku, dan waktu |
 | **Kategori** | CRUD kategori menu |
 | **Menu** | CRUD menu, harga, foto menu, penanda menu signature, serta status aktif/nonaktif |
 | **Pesanan Online** | Katalog publik, keranjang, pengiriman pesanan, cek status, kode pesanan acak, batas 10 pesanan per menit per IP, total sudah termasuk pajak, dan pembatalan beralasan |
-| **Laporan Penjualan** | Filter periode/metode/kasir, ringkasan omzet, grafik harian, produk terlaris, ekspor CSV |
+| **Laporan Penjualan** | Filter periode/metode/kasir, ringkasan omzet, grafik harian, produk terlaris, ekspor CSV, dan halaman cetak A4 |
 | **Shift Kasir** | Buka/tutup shift, kas awal, rekonsiliasi kas, perhitungan selisih kas otomatis, audit penutup shift, filter tanggal/karyawan/status |
 | **Absensi** | Clock-in / clock-out, koreksi oleh Manager dengan alasan, riwayat koreksi, dan rekap operasional harian |
 | **Pengguna** | CRUD akun karyawan (khusus Manager) |
@@ -324,7 +324,8 @@ routes/web.php              # Semua rute + middleware peran
 
 ## Catatan
 
-- **Tampilan mobile**: pada layar < 992px sidebar staf berubah menjadi *drawer* (tombol hamburger di topbar), dan pada < 768px muncul *bottom navigation* (Dasbor, Kasir, Pesanan, Shift, Lainnya). Halaman POS memakai bar total yang menempel di bawah. Semua layout memakai `viewport-fit=cover` + `env(safe-area-inset-*)` agar aman di iPhone, dan ukuran font input dinaikkan ke 16px supaya Safari tidak melakukan auto-zoom.
+- **Tampilan mobile**: pada layar < 992px sidebar staf berubah menjadi *drawer* (tombol hamburger di topbar), dan pada < 768px muncul *bottom navigation* (Dasbor, Kasir, Pesanan, Shift, Lainnya). Halaman POS memakai bar total yang menempel di bawah. Semua layout memakai `viewport-fit=cover` + `env(safe-area-inset-*)` agar aman di iPhone, dan ukuran font input dinaikkan ke 16px supaya Safari tidak melakukan auto-zoom. Tabel data staf otomatis berubah menjadi kartu di layar < 768px, jadi tidak perlu digeser ke samping.
+- **Cetak**: struk memakai kertas thermal 80 mm (nama outlet, alamat, dan footer diambil dari Pengaturan), sedangkan laporan punya gaya cetak A4 — sidebar, filter, dan tombol disembunyikan, header periode muncul otomatis, dan header tabel diulang di setiap halaman.
 - Format mata uang: **Rupiah (Rp)**, tanpa desimal pada tampilan.
 - Pajak default: **PB1 10%**, dapat diubah/dinonaktifkan di menu Pengaturan.
 - Total yang dilihat customer di katalog, keranjang, dan halaman status **sudah termasuk pajak**, sehingga sama dengan tagihan kasir saat checkout.

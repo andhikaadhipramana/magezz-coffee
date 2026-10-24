@@ -5,106 +5,253 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Struk {{ $transaction->code }}</title>
     <style>
-        body {
-            font-family: "Courier New", monospace; font-size: 12px; color: #000;
-            max-width: 300px; margin: 0 auto; padding: 12px;
+        @page {
+            size: 80mm auto;
+            margin: 3mm;
         }
-        .center { text-align: center; }
-        .divider { border-top: 1px dashed #000; margin: 6px 0; }
-        table { width: 100%; border-collapse: collapse; }
-        td { padding: 1px 0; vertical-align: top; }
-        .right { text-align: right; }
-        .bold { font-weight: bold; }
-        .store-name { font-size: 15px; font-weight: bold; letter-spacing: .5px; }
-        .no-print { text-align: center; margin-bottom: 12px; }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            max-width: 80mm;
+            margin: 0 auto;
+            padding: 10px 8px 16px;
+            background: #fff;
+            color: #111;
+            font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            font-size: 11px;
+            line-height: 1.45;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 14px;
+        }
+
+        .toolbar button {
+            padding: 8px 16px;
+            border: 1px solid #cbbba7;
+            border-radius: 999px;
+            background: #fff;
+            color: #2b1d14;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .toolbar button:hover {
+            background: #f5ede2;
+        }
+
+        .brand {
+            text-align: center;
+        }
+
+        .brand__name {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .brand__line {
+            font-size: 10.5px;
+            color: #444;
+        }
+
+        .rule {
+            margin: 8px 0;
+            border-top: 1px dashed #8a8a8a;
+        }
+
+        .meta,
+        .sum {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .meta td,
+        .sum td {
+            padding: 1px 0;
+            vertical-align: top;
+        }
+
+        .meta td:last-child {
+            text-align: right;
+            overflow-wrap: anywhere;
+        }
+
+        .sum td:last-child {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .meta td:first-child {
+            color: #444;
+        }
+
+        .item {
+            margin-bottom: 7px;
+        }
+
+        .item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item__name {
+            font-weight: 700;
+        }
+
+        .item__variant {
+            font-size: 10px;
+            color: #555;
+        }
+
+        .item__row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .item__qty {
+            color: #333;
+        }
+
+        .sum .total td {
+            padding-top: 6px;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 10.5px;
+            color: #333;
+        }
+
+        .void {
+            margin-top: 10px;
+            padding: 4px;
+            border: 2px solid #000;
+            text-align: center;
+            font-weight: 800;
+            letter-spacing: 0.24em;
+        }
+
         @media print {
-            .no-print { display: none; }
-            body { margin: 0; padding: 0; }
+            .toolbar {
+                display: none;
+            }
+
+            body {
+                max-width: none;
+                padding: 0;
+            }
+
+            .brand__line,
+            .item__variant,
+            .footer,
+            .meta td:first-child {
+                color: #000;
+            }
         }
     </style>
 </head>
 <body onload="window.print()">
-    <div class="no-print">
-        <button onclick="window.print()">Cetak Ulang</button>
-        <button onclick="window.close()">Tutup</button>
+    @php
+        $outletName = \App\Models\Setting::get('outlet_name', 'Magezz Coffee');
+        $outletAddress = \App\Models\Setting::get('outlet_address');
+        $outletPhone = \App\Models\Setting::get('outlet_phone');
+    @endphp
+
+    <div class="toolbar">
+        <button type="button" onclick="window.print()">Cetak</button>
+        <button type="button" onclick="window.close()">Tutup</button>
     </div>
 
-    <div class="center">
-        <div class="store-name">MAGEZZ COFFEE</div>
-        <div>{{ \App\Models\Setting::get('outlet_address', '') }}</div>
-        <div>Telp: {{ \App\Models\Setting::get('outlet_phone', '-') }}</div>
+    <div class="brand">
+        <div class="brand__name">{{ $outletName }}</div>
+        @if($outletAddress)
+            <div class="brand__line">{{ $outletAddress }}</div>
+        @endif
+        @if($outletPhone)
+            <div class="brand__line">Telp {{ $outletPhone }}</div>
+        @endif
     </div>
 
-    <div class="divider"></div>
+    <div class="rule"></div>
 
-    <table>
-        <tr><td>No.</td><td class="right">{{ $transaction->code }}</td></tr>
-        <tr><td>Tanggal</td><td class="right">{{ $transaction->created_at->format('d/m/Y H:i') }}</td></tr>
-        <tr><td>Kasir</td><td class="right">{{ $transaction->user?->name }}</td></tr>
+    <table class="meta">
+        <tr><td>No. Struk</td><td>{{ $transaction->code }}</td></tr>
+        <tr><td>Waktu</td><td>{{ $transaction->created_at->format('d/m/Y H:i') }}</td></tr>
+        <tr><td>Kasir</td><td>{{ $transaction->user?->name }}</td></tr>
+        <tr><td>Pembayaran</td><td>{{ $transaction->paymentLabel() }}</td></tr>
     </table>
 
-    <div class="divider"></div>
+    <div class="rule"></div>
 
     @foreach($transaction->items as $item)
-        <div class="bold">{{ $item->menu_name }}</div>
-        @if($item->variant_info)
-            <div style="font-size:11px">{{ $item->variant_info }}</div>
-        @endif
-        <table>
-            <tr>
-                <td>{{ $item->quantity }} x {{ number_format((float) $item->price, 0, ',', '.') }}</td>
-                <td class="right">{{ number_format((float) $item->subtotal, 0, ',', '.') }}</td>
-            </tr>
-        </table>
+        <div class="item">
+            <div class="item__name">{{ $item->menu_name }}</div>
+            @if($item->variant_info)
+                <div class="item__variant">{{ $item->variant_info }}</div>
+            @endif
+            <div class="item__row">
+                <span class="item__qty">{{ $item->quantity }} &times; {{ rupiah($item->price) }}</span>
+                <span>{{ rupiah($item->subtotal) }}</span>
+            </div>
+        </div>
     @endforeach
 
-    <div class="divider"></div>
+    <div class="rule"></div>
 
-    <table>
+    <table class="sum">
         <tr>
             <td>Subtotal</td>
-            <td class="right">{{ number_format((float) $transaction->subtotal, 0, ',', '.') }}</td>
+            <td>{{ rupiah($transaction->subtotal) }}</td>
         </tr>
         @if((float) $transaction->discount_amount > 0)
             <tr>
                 <td>Diskon</td>
-                <td class="right">-{{ number_format((float) $transaction->discount_amount, 0, ',', '.') }}</td>
+                <td>&minus;{{ rupiah($transaction->discount_amount) }}</td>
             </tr>
         @endif
         @if((float) $transaction->tax_amount > 0)
             <tr>
                 <td>Pajak PB1</td>
-                <td class="right">{{ number_format((float) $transaction->tax_amount, 0, ',', '.') }}</td>
+                <td>{{ rupiah($transaction->tax_amount) }}</td>
             </tr>
         @endif
-        <tr class="bold">
-            <td style="font-size:13px">TOTAL</td>
-            <td class="right" style="font-size:13px">Rp {{ number_format((float) $transaction->total, 0, ',', '.') }}</td>
+        <tr class="total">
+            <td>Total</td>
+            <td>{{ rupiah($transaction->total) }}</td>
         </tr>
+        @if((float) $transaction->paid_amount > 0)
+            <tr>
+                <td>Dibayar</td>
+                <td>{{ rupiah($transaction->paid_amount) }}</td>
+            </tr>
+        @endif
+        @if((float) $transaction->change_amount > 0)
+            <tr>
+                <td>Kembali</td>
+                <td>{{ rupiah($transaction->change_amount) }}</td>
+            </tr>
+        @endif
     </table>
 
-    <div class="divider"></div>
+    <div class="rule"></div>
 
-    <table>
-        <tr>
-            <td>{{ $transaction->paymentLabel() }}</td>
-            <td class="right">{{ number_format((float) $transaction->paid_amount, 0, ',', '.') }}</td>
-        </tr>
-        <tr>
-            <td>Kembali</td>
-            <td class="right">{{ number_format((float) $transaction->change_amount, 0, ',', '.') }}</td>
-        </tr>
-    </table>
-
-    <div class="divider"></div>
-
-    <div class="center" style="font-size:11px">
+    <div class="footer">
         {{ \App\Models\Setting::get('receipt_footer', 'Terima kasih atas kunjungan Anda') }}
     </div>
 
     @if($transaction->status === 'void')
-        <div class="divider"></div>
-        <div class="center bold" style="font-size:14px">*** VOID ***</div>
+        <div class="void">VOID</div>
     @endif
 </body>
 </html>

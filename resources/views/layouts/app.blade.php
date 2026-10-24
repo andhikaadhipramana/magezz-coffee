@@ -464,6 +464,36 @@
                 });
             });
 
+            /* ---------- Tabel staf menjadi kartu di layar kecil ---------- */
+            document.querySelectorAll('table.mz-table-cards').forEach(function (table) {
+                var headerRow = table.querySelector('thead tr');
+                if (!headerRow) return;
+
+                var labels = Array.prototype.map.call(headerRow.children, function (th) {
+                    return (th.textContent || '').trim();
+                });
+
+                table.querySelectorAll('tbody tr').forEach(function (row) {
+                    var cells = row.children;
+
+                    if (cells.length === 1 && cells[0].hasAttribute('colspan')) {
+                        row.classList.add('mz-table-cards__empty');
+                        return;
+                    }
+
+                    Array.prototype.forEach.call(cells, function (cell, index) {
+                        if (!cell.hasAttribute('data-label') && labels[index]) {
+                            cell.setAttribute('data-label', labels[index]);
+                        }
+                    });
+
+                    var lastCell = cells[cells.length - 1];
+                    if (lastCell && lastCell.querySelector('a, button, form')) {
+                        lastCell.classList.add('mz-td-actions');
+                    }
+                });
+            });
+
             /* Skeleton foto: tandai host setelah gambar selesai dimuat */
             document.querySelectorAll('img[data-mz-img]').forEach(function (img) {
                 function markLoaded() {

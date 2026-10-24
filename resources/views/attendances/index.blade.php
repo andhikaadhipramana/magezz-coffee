@@ -247,7 +247,7 @@
                 <i class="bi bi-clock-history me-1"></i> Riwayat Koreksi Absensi
             </div>
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
+                <table class="table table-hover align-middle mb-0 mz-table-cards">
                     <thead class="table-light">
                         <tr>
                             <th>Waktu Koreksi</th>
@@ -287,7 +287,7 @@
             <span class="small text-muted">{{ $attendances->total() }} data</span>
         </div>
         <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
+            <table class="table table-hover align-middle mb-0 mz-table-cards">
                 <thead class="table-light">
                     <tr>
                         <th>Tanggal</th>

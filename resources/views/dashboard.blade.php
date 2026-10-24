@@ -78,7 +78,7 @@
                     <a href="{{ route('transactions.index') }}" class="btn btn-sm btn-outline-secondary">Lihat semua</a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-hover mb-0 align-middle">
+                    <table class="table table-hover mb-0 align-middle mz-table-cards">
                         <thead>
                             <tr>
                                 <th>Kode</th>

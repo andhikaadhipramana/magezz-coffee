@@ -2932,6 +2932,97 @@
     border-radius: 0 0 var(--mz-radius) var(--mz-radius);
 }
 
+/* ---------- Tabel staf menjadi kartu di layar kecil ---------- */
+
+@media (max-width: 767.98px) {
+    .mz-table-cards {
+        display: block;
+        width: 100%;
+    }
+
+    .mz-table-cards thead {
+        display: none;
+    }
+
+    .mz-table-cards tbody {
+        display: block;
+    }
+
+    .mz-table-cards tbody tr {
+        display: block;
+        margin-bottom: 12px;
+        padding: 14px 16px;
+        border: 1px solid var(--mz-line);
+        border-radius: 14px;
+        background: var(--mz-cream-50);
+    }
+
+    .mz-table-cards tbody tr:last-child {
+        margin-bottom: 0;
+    }
+
+    .mz-table-cards tbody td {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 5px 0;
+        border: 0;
+        text-align: right;
+    }
+
+    .mz-table-cards tbody td::before {
+        content: attr(data-label);
+        flex: 0 0 auto;
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        line-height: 1.6;
+        text-transform: uppercase;
+        color: var(--mz-ink-500);
+        text-align: left;
+    }
+
+    .mz-table-cards tbody td:first-child {
+        display: block;
+        padding: 0 0 10px;
+        margin-bottom: 6px;
+        border-bottom: 1px dashed var(--mz-line-strong);
+        text-align: left;
+        font-size: 14.5px;
+    }
+
+    .mz-table-cards tbody td:first-child::before {
+        display: none;
+    }
+
+    .mz-table-cards tbody td.mz-td-actions {
+        justify-content: flex-end;
+        padding-top: 10px;
+        margin-top: 6px;
+        border-top: 1px dashed var(--mz-line-strong);
+    }
+
+    .mz-table-cards tbody td.mz-td-actions::before {
+        display: none;
+    }
+
+    .mz-table-cards tbody tr.mz-table-cards__empty {
+        padding: 18px 14px;
+        border-style: dashed;
+        background: transparent;
+    }
+
+    .mz-table-cards tbody tr.mz-table-cards__empty td {
+        display: block;
+        text-align: center;
+    }
+
+    .mz-table-cards tbody tr.mz-table-cards__empty td::before {
+        display: none;
+    }
+}
+
 .mz-staff .btn {
     border-radius: var(--mz-radius-pill);
     font-size: 13px;
@@ -4275,20 +4366,132 @@ body:has(.mz-pos-page) {
     }
 }
 
+.mz-print-head {
+    display: none;
+}
+
 @media print {
+    @page {
+        margin: 12mm;
+    }
+
     .mz-staff .mz-sidebar,
     .mz-staff .mz-staff-topbar,
     .mz-staff .mz-staff-footer,
-    .no-print {
+    .mz-staff .mz-bottomnav,
+    .mz-staff .mz-pos-mobilebar,
+    .mz-drawer-backdrop,
+    .mz-toasts,
+    .no-print,
+    .d-print-none {
         display: none !important;
     }
 
     .mz-staff-content {
-        margin-left: 0;
+        margin-left: 0 !important;
     }
 
     .mz-staff-main {
-        padding: 0;
+        padding: 0 !important;
+    }
+
+    .mz-staff-main .row {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    .mz-print-head {
+        display: block;
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #000;
+    }
+
+    .mz-print-head__brand {
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    .mz-print-head__title {
+        font-size: 13.5px;
+        font-weight: 700;
+    }
+
+    .mz-print-head__meta {
+        font-size: 11px;
+        color: #333;
+    }
+
+    .mz-staff .card,
+    .mz-kpi {
+        border: 1px solid #bbb !important;
+        box-shadow: none !important;
+    }
+
+    .mz-staff .card-header {
+        border-bottom: 1px solid #bbb !important;
+    }
+
+    .mz-staff .table-responsive {
+        overflow: visible !important;
+    }
+
+    .mz-staff .table thead {
+        display: table-header-group;
+    }
+
+    .mz-staff .table tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .mz-staff .table th,
+    .mz-staff .table td {
+        padding: 6px 8px;
+        border-color: #bbb !important;
+        font-size: 11px;
+    }
+
+    .mz-staff .badge {
+        border: 1px solid #999;
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    .mz-table-cards,
+    .mz-table-cards tbody {
+        display: table !important;
+        width: 100% !important;
+    }
+
+    .mz-table-cards tbody {
+        display: table-row-group !important;
+    }
+
+    .mz-table-cards thead {
+        display: table-header-group !important;
+    }
+
+    .mz-table-cards tbody tr {
+        display: table-row !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+    }
+
+    .mz-table-cards tbody td {
+        display: table-cell !important;
+        padding: 6px 8px !important;
+        border: 0 !important;
+        border-bottom: 1px solid #bbb !important;
+        text-align: left !important;
+    }
+
+    .mz-table-cards tbody td::before {
+        display: none !important;
     }
 }
 

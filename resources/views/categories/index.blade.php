@@ -42,7 +42,7 @@
                     <span class="badge bg-secondary ms-1">{{ $categories->total() }}</span>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
+                    <table class="table table-hover align-middle mb-0 mz-table-cards">
                         <thead class="table-light">
                             <tr>
                                 <th>Kode</th>
