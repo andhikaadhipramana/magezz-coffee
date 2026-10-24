@@ -331,3 +331,5 @@ routes/web.php              # Semua rute + middleware peran
 - Total yang dilihat customer di katalog, keranjang, dan halaman status **sudah termasuk pajak**, sehingga sama dengan tagihan kasir saat checkout.
 - Perhitungan uang memakai `decimal(12,2)` agar tidak ada galat pembulatan floating point.
 - Data awal (menu & harga) mengacu pada Lampiran A PRD dan bersifat contoh — silakan sesuaikan.
+#   m a g e z z - c o f f e e  
+ 
