@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Halaman publik yang boleh diindeks
+Allow: /order/cek
+
+# Area staf & alur transaksi
+Disallow: /login
+Disallow: /cart
+Disallow: /order/
+Disallow: /dashboard
+Disallow: /pos
+Disallow: /transactions
+Disallow: /orders
+Disallow: /shifts
+Disallow: /attendances
+Disallow: /reports
+Disallow: /categories
+Disallow: /menus
+Disallow: /users
+Disallow: /settings

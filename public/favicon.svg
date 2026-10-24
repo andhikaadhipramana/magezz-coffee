@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Magezz Coffee">
+  <defs>
+    <linearGradient id="espresso" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3c2a1e"/>
+      <stop offset="1" stop-color="#1c120d"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="13.75" fill="url(#espresso)"/>
+  <g fill="none" stroke="#e6c9a3" stroke-width="2.25" stroke-linecap="round">
+    <path d="M26.9 17.5C23.1 13.75 30.6 11.25 26.9 6.9"/>
+    <path d="M36.9 17.5C33.1 13.75 40.6 11.25 36.9 6.9"/>
+  </g>
+  <path d="M45.4 28C56.9 29.4 56.9 37.9 45.4 39.25" fill="none" stroke="#f5ede2" stroke-width="3.875" stroke-linecap="round"/>
+  <rect x="12.25" y="44.125" width="39.5" height="3.875" rx="1.94" fill="#e6c9a3"/>
+  <path d="M18.75 22.5H45.25C44.75 35 43.25 41.4 40 43.75H24C20.75 41.4 19.25 35 18.75 22.5Z" fill="#f5ede2"/>
+  <rect x="17" y="19.75" width="30" height="4.875" rx="2.44" fill="#e6c9a3"/>
+  <ellipse cx="32" cy="22.25" rx="12.75" ry="1.25" fill="#6f4e37"/>
+</svg>

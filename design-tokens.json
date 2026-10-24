@@ -1,0 +1,184 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "name": "Magezz Coffee Design Tokens",
+  "description": "Single source of truth for Coffee Editorial design system. Used to generate CSS custom properties, Stylelint config, and documentation.",
+  "color": {
+    "espresso": {
+      "900": { "value": "#1c120d", "description": "Darkest espresso - primary text, headings" },
+      "800": { "value": "#2b1d14", "description": "Primary button background, sidebar background" },
+      "700": { "value": "#3c2a1e", "description": "Secondary surfaces, gradients" }
+    },
+    "coffee": {
+      "600": { "value": "#6f4e37", "description": "Eyebrow text, coffee tile gradient" },
+      "500": { "value": "#87654b", "description": "Eyebrow accent, tile icons" }
+    },
+    "caramel": {
+      "600": { "value": "#a9743f", "description": "Hover states, accent borders" },
+      "500": { "value": "#c08a4e", "description": "Primary accent, brand mark, focus rings" },
+      "300": { "value": "#e6c9a3", "description": "Light accent, borders, chip backgrounds" }
+    },
+    "cream": {
+      "50": { "value": "#fbf8f3", "description": "Page background (lightest)" },
+      "100": { "value": "#f5ede2", "description": "Card backgrounds, input backgrounds" },
+      "200": { "value": "#ece0d1", "description": "Hover backgrounds, dividers" }
+    },
+    "ink": {
+      "900": { "value": "#241b16", "description": "Primary text, headings" },
+      "700": { "value": "#4a3b31", "description": "Body text" },
+      "500": { "value": "#7a6a5d", "description": "Muted text, placeholders" }
+    },
+    "line": {
+      "default": { "value": "#e8dccd", "description": "Default borders, dividers" },
+      "strong": { "value": "#dccdb9", "description": "Stronger borders, active states" }
+    },
+    "white": { "value": "#ffffff", "description": "Pure white for cards, modals" },
+    "semantic": {
+      "success": {
+        "700": { "value": "#55684a", "description": "Success text, sage badges" },
+        "100": { "value": "#eef2e8", "description": "Success backgrounds" }
+      },
+      "warning": {
+        "700": { "value": "#a4691b", "description": "Warning text, amber badges" },
+        "100": { "value": "#fbf0dd", "description": "Warning backgrounds" }
+      },
+      "info": {
+        "700": { "value": "#3f6b86", "description": "Info text, steel badges" },
+        "100": { "value": "#e9f1f6", "description": "Info backgrounds" }
+      },
+      "danger": {
+        "700": { "value": "#a53a34", "description": "Danger text, error states" },
+        "100": { "value": "#fbeceb", "description": "Danger backgrounds" }
+      }
+    }
+  },
+  "typography": {
+    "fontFamilies": {
+      "display": { "value": "\"Fraunces\", Georgia, \"Times New Roman\", serif", "description": "Headlines, display text, prices" },
+      "ui": { "value": "\"Plus Jakarta Sans\", \"Segoe UI\", system-ui, -apple-system, sans-serif", "description": "Body text, UI elements, forms" }
+    },
+    "fontWeights": {
+      "regular": { "value": "400" },
+      "medium": { "value": "500" },
+      "semibold": { "value": "600" },
+      "bold": { "value": "700" },
+      "extrabold": { "value": "800" }
+    },
+    "fontSizes": {
+      "xs": { "value": "10.5px", "description": "Tiny labels, badge counts" },
+      "sm": { "value": "12.5px", "description": "Small text, meta info, prices small" },
+      "base": { "value": "14px", "description": "Base UI text, inputs" },
+      "md": { "value": "15.5px", "description": "Menu names, card titles" },
+      "lg": { "value": "16.5px", "description": "Prices" },
+      "xl": { "value": "19px", "description": "Section titles" },
+      "2xl": { "value": "20px", "description": "Summary titles" },
+      "3xl": { "value": "24px", "description": "Section headings" },
+      "4xl": { "value": "27px", "description": "Page headings" },
+      "5xl": { "value": "30px", "description": "Hero display (mobile)" },
+      "6xl": { "value": "clamp(2.5rem, 4.6vw, 4rem)", "description": "Hero display (desktop)" }
+    },
+    "lineHeights": {
+      "tight": { "value": "1.02", "description": "Display headings" },
+      "snug": { "value": "1.05", "description": "Display subheadings" },
+      "normal": { "value": "1.35", "description": "Card text" },
+      "relaxed": { "value": "1.55", "description": "Body text" }
+    },
+    "letterSpacings": {
+      "tight": { "value": "-0.025em", "description": "Display headings" },
+      "snug": { "value": "-0.02em", "description": "Large headings" },
+      "normal": { "value": "0", "description": "Body text" },
+      "wide": { "value": "0.02em", "description": "Prices, tabular nums" },
+      "wider": { "value": "0.06em", "description": "Flags, uppercase" },
+      "widest": { "value": "0.18em", "description": "Eyebrow, brand sub" }
+    }
+  },
+  "spacing": {
+    "0": { "value": "0" },
+    "1": { "value": "4px", "description": "Base unit" },
+    "2": { "value": "8px", "description": "Small gap, padding" },
+    "3": { "value": "12px", "description": "Medium gap, padding" },
+    "4": { "value": "16px", "description": "Standard padding, gap" },
+    "5": { "value": "20px", "description": "Large padding, container" },
+    "6": { "value": "24px", "description": "Section gap" },
+    "8": { "value": "32px", "description": "Page padding vertical" },
+    "10": { "value": "40px", "description": "Large section gap" },
+    "12": { "value": "48px", "description": "Hero padding" },
+    "16": { "value": "64px", "description": "Max page padding" }
+  },
+  "borderRadius": {
+    "none": { "value": "0" },
+    "sm": { "value": "8px", "description": "Inputs, small cards" },
+    "md": { "value": "12px", "description": "Menu cards, inputs" },
+    "lg": { "value": "14px", "description": "Standard cards, panels" },
+    "xl": { "value": "18px", "description": "Large panels, signatures" },
+    "2xl": { "value": "22px", "description": "Large cards" },
+    "full": { "value": "999px", "description": "Pills, buttons, avatars" },
+    "custom": {
+      "signature": { "value": "180px 180px 26px 26px", "description": "Arch shape for signature card" }
+    }
+  },
+  "shadows": {
+    "xs": { "value": "0 1px 2px rgba(36, 27, 22, 0.05)", "description": "Subtle, cards at rest" },
+    "sm": { "value": "0 4px 14px rgba(36, 27, 22, 0.06)", "description": "Buttons, small elevation" },
+    "md": { "value": "0 14px 34px rgba(36, 27, 22, 0.1)", "description": "Cards on hover, panels" },
+    "lg": { "value": "0 26px 60px rgba(36, 27, 22, 0.18)", "description": "Modals, dropdowns, FAB" },
+    "xl": { "value": "0 32px 60px -28px rgba(44, 26, 15, 0.55)", "description": "Signature card" },
+    "ring": { "value": "0 0 0 3px rgba(192, 138, 78, 0.35)", "description": "Focus rings" }
+  },
+  "transitions": {
+    "ease": { "value": "cubic-bezier(0.2, 0.7, 0.3, 1)", "description": "Standard easing" },
+    "fast": { "value": "0.14s", "description": "Buttons, inputs, chips" },
+    "normal": { "value": "0.3s", "description": "Cards, modals" },
+    "slow": { "value": "0.45s", "description": "Signature card hover" },
+    "very-slow": { "value": "0.8s", "description": "Image scale on hover" }
+  },
+  "zIndex": {
+    "base": { "value": "1" },
+    "sticky": { "value": "50", "description": "Navbars" },
+    "fab": { "value": "60", "description": "Floating action button" },
+    "toast": { "value": "70" },
+    "modal-backdrop": { "value": "80" },
+    "modal": { "value": "90" },
+    "tooltip": { "value": "100" }
+  },
+  "breakpoints": {
+    "sm": { "value": "640px" },
+    "md": { "value": "768px" },
+    "lg": { "value": "992px" },
+    "xl": { "value": "1200px" }
+  },
+  "container": {
+    "maxWidth": { "value": "1160px" },
+    "padding": { "value": "20px" }
+  },
+  "components": {
+    "button": {
+      "height": { "default": "44px", "sm": "36px", "icon": "40px" },
+      "padding": { "default": "0 20px", "sm": "0 15px" },
+      "borderRadius": { "value": "999px" }
+    },
+    "badge": {
+      "height": { "value": "24px" },
+      "padding": { "value": "0 10px" },
+      "fontSize": { "value": "11.5px" }
+    },
+    "input": {
+      "height": { "value": "46px" },
+      "padding": { "value": "0 14px" },
+      "borderRadius": { "value": "12px" }
+    },
+    "chip": {
+      "height": { "value": "36px" },
+      "padding": { "value": "0 15px" },
+      "borderRadius": { "value": "999px" }
+    },
+    "menuCard": {
+      "aspectRatio": { "value": "1/1" },
+      "borderRadius": { "value": "14px" }
+    },
+    "signatureCard": {
+      "aspectRatio": { "value": "4/5" },
+      "borderRadius": { "value": "180px 180px 26px 26px" }
+    }
+  }
+}

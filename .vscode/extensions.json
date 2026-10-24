@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "onecentlin.laravel-blade",
+    "shufo.vscode-blade-formatter",
+    "esbenp.prettier-vscode",
+    "stylelint.vscode-stylelint",
+    "naumovs.color-highlight",
+    "zignd.html-css-class-completion"
+  ],
+  "unwantedRecommendations": []
+}
