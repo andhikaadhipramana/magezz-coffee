@@ -1,7 +1,7 @@
 @import "design-tokens.css";
 
 /* =========================================================
-   Magezz Coffee â€” Design System "Coffee Editorial"
+   Magezz Coffee — Design System "Coffee Editorial"
    Semua token & komponen di-scope dengan prefix .mz-
    Dipakai oleh layout publik, layout staf, dan halaman preview.
    ========================================================= */
@@ -3419,7 +3419,7 @@
 
 /* ---------- POS (Kasir) ---------- */
 
-/* Token khusus POS — hanya memakai variabel yang benar-benar ada di :root utama */
+/* Token khusus POS â€” hanya memakai variabel yang benar-benar ada di :root utama */
 :root {
     --mz-pos-radius: var(--mz-radius);
     --mz-pos-radius-sm: 10px;
@@ -3583,7 +3583,7 @@ body:has(.mz-pos-page) {
     font-variant-numeric: tabular-nums;
 }
 
-/* Badge signature — dibatasi ke halaman POS agar tidak mengubah badge publik */
+/* Badge signature â€” dibatasi ke halaman POS agar tidak mengubah badge publik */
 .mz-pos-page .mz-badge.mz-badge--caramel {
     padding: 2px 8px;
     border: 0;
@@ -3671,7 +3671,7 @@ body:has(.mz-pos-page) {
     background: transparent;
 }
 
-/* Empty state — dibatasi ke POS (class ini juga dipakai halaman publik) */
+/* Empty state â€” dibatasi ke POS (class ini juga dipakai halaman publik) */
 .mz-pos-page .mz-empty {
     padding: 44px 22px;
     text-align: center;

@@ -121,7 +121,7 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
-Data awal mencakup: 2 akun pengguna, 5 kategori, dan 28 menu dengan foto contoh.
+Data awal mencakup: 3 akun pengguna (1 manager, 2 kasir), 5 kategori, dan 28 menu dengan foto contoh.
 
 ### 6. Jalankan aplikasi
 
@@ -331,5 +331,4 @@ routes/web.php              # Semua rute + middleware peran
 - Total yang dilihat customer di katalog, keranjang, dan halaman status **sudah termasuk pajak**, sehingga sama dengan tagihan kasir saat checkout.
 - Perhitungan uang memakai `decimal(12,2)` agar tidak ada galat pembulatan floating point.
 - Data awal (menu & harga) mengacu pada Lampiran A PRD dan bersifat contoh — silakan sesuaikan.
-#   m a g e z z - c o f f e e  
- 
+# magezz-coffee
