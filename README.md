@@ -172,10 +172,10 @@ Identitas visual disimpan langsung di `public/`:
 | `public/images/og-cover.png` | Gambar pratinjau 1200×630 saat tautan dibagikan |
 
 Ketiga layout memuat favicon dan meta Open Graph. Khusus `css/magezz.css`, pemuatan
-memakai helper `asset_v()` di `app/Support/helpers.php` yang menambahkan `?v=<filemtime>`
+memakai helper `asset_v()` di `backend/Support/helpers.php` yang menambahkan `?v=<filemtime>`
 sehingga browser tidak menyimpan CSS lama setelah diperbarui.
 
-Halaman error bertema tersedia di `resources/views/errors/` (403, 404, 419, 500, 503,
+Halaman error bertema tersedia di `frontend/views/errors/` (403, 404, 419, 500, 503,
 serta fallback `4xx`/`5xx`). Halaman ini berdiri sendiri dan tidak bergantung pada
 database, jadi tetap tampil rapi saat terjadi kegagalan sistem.
 
@@ -208,7 +208,7 @@ database, jadi tetap tampil rapi saat terjadi kegagalan sistem.
 | Pengguna | ✅ | ❌ |
 | Pengaturan | ✅ | ❌ |
 
-Implementasi: middleware `role` (`app/Http/Middleware/RoleMiddleware.php`).
+Implementasi: middleware `role` (`backend/Http/Middleware/RoleMiddleware.php`).
 
 **Isolasi data kasir:** untuk role Kasir, dashboard (omzet hari ini/bulan ini, produk terlaris, transaksi terbaru), daftar transaksi, detail transaksi, struk, serta ringkasan dan riwayat shift hanya menghitung data milik akun itu sendiri (`user_id`). Membuka transaksi kasir lain secara langsung ditolak dengan **403**. Manager tetap melihat data seluruh kasir.
 
@@ -276,13 +276,16 @@ Selisih ditampilkan sebagai *surplus* atau *defisit*. Jika ada selisih, Manager 
 
 ## Struktur Proyek
 
+Proyek memisahkan **backend** (logika aplikasi) dan **frontend** (tampilan) ke dua folder utama:
+
 ```
-app/
-├── Console/Commands/       # OptimizeMenuImages (varian WebP foto menu)
+backend/                      # BACKEND — logika aplikasi (PHP)
+├── Console/Commands/         # OptimizeMenuImages (varian WebP foto menu)
 ├── Http/
-│   ├── Controllers/        # AuthController, PosController, MenuController, dll.
-│   └── Middleware/         # RoleMiddleware, EnsureActiveUser
-├── Models/                 # User, Category, Menu, Shift, Attendance, AttendanceCorrection, Transaction, Setting
+│   ├── Controllers/          # AuthController, PosController, MenuController, dll.
+│   └── Middleware/           # RoleMiddleware, EnsureActiveUser
+├── Models/                   # User, Category, Menu, Shift, Attendance, AttendanceCorrection, Transaction, Setting
+├── Providers/                # AppServiceProvider (view composer)
 ├── Services/
 │   ├── CartService.php           # Keranjang & kalkulasi harga
 │   ├── LoginThrottleService.php  # Lockout login berjenjang
@@ -292,33 +295,51 @@ app/
     ├── MenuImage.php       # Pembuatan & srcset varian WebP
     └── helpers.php         # Helper rupiah(), rupiah_decimal(), asset_v()
 
+frontend/                     # FRONTEND — tampilan (Blade)
+├── views/
+│   ├── layouts/app.blade.php      # Layout staf (sidebar + topbar)
+│   ├── layouts/public.blade.php   # Layout pelanggan
+│   ├── errors/                    # Halaman error bertema (403/404/419/500/503)
+│   ├── auth/                      # Halaman login
+│   ├── dashboard.blade.php
+│   ├── pos/                       # Antarmuka kasir
+│   ├── menus/  categories/
+│   ├── transactions/              # Daftar, detail, struk
+│   └── reports/  shifts/  attendances/  users/  settings/
+├── css/                       # Sumber CSS (opsional)
+└── js/                        # Sumber JS (opsional)
+
+public/                       # Web root — aset yang diakses browser
+├── favicon.ico  favicon.svg  apple-touch-icon.png
+├── icon-192.png  icon-512.png  site.webmanifest
+├── images/og-cover.png     # Pratinjau tautan (Open Graph)
+├── css/
+│   ├── design-tokens.css   # Design tokens (auto-generate)
+│   └── magezz.css          # Tema Coffee Editorial
+└── uploads/menus/          # Foto menu (asli + varian WebP 320/640/960)
+
 database/
 ├── migrations/             # Migrasi tabel
 └── seeders/                # Data awal (kategori, menu, user)
 
-public/
-├── favicon.ico  favicon.svg  apple-touch-icon.png
-├── icon-192.png  icon-512.png  site.webmanifest
-├── images/og-cover.png     # Pratinjau tautan (Open Graph)
-├── css/magezz.css          # Tema Coffee Editorial
-└── uploads/menus/          # Foto menu (asli + varian WebP 320/640/960)
-
-resources/views/
-├── layouts/app.blade.php   # Layout utama (sidebar + topbar)
-├── layouts/public.blade.php
-├── errors/                 # Halaman error bertema (403/404/419/500/503)
-├── auth/                   # Halaman login
-├── dashboard.blade.php
-├── pos/                    # Antarmuka kasir
-├── menus/  categories/
-├── transactions/           # Daftar, detail, struk
-├── reports/  shifts/  attendances/  users/  settings/
-
-.github/workflows/tests.yml  # CI: Pint + PHPUnit (MySQL)
-docs/screenshots/           # Tangkapan layar untuk README
-
 routes/web.php              # Semua rute + middleware peran
+.github/workflows/tests.yml # CI: Pint + PHPUnit (MySQL)
+docs/screenshots/           # Tangkapan layar untuk README
 ```
+
+**Alur satu request:**
+
+```
+Browser → routes/web.php → backend/Http/Controllers → backend/Services & backend/Models
+                                                        ↓
+                                             frontend/views (Blade) → HTML
+```
+
+- **Route** menentukan URL dan middleware (peran/status akun).
+- **Controller** (backend) menerima request, memanggil Service/Model, lalu merender `view('...')`.
+- **Service** menyimpan logika bisnis (keranjang, transaksi, pesanan, lockout login).
+- **Model** mewakili tabel database.
+- **View** (`frontend/views`) hanya mengatur tampilan; CSS/JS yang dikirim ke browser ada di `public/`.
 
 ---
 
@@ -331,4 +352,3 @@ routes/web.php              # Semua rute + middleware peran
 - Total yang dilihat customer di katalog, keranjang, dan halaman status **sudah termasuk pajak**, sehingga sama dengan tagihan kasir saat checkout.
 - Perhitungan uang memakai `decimal(12,2)` agar tidak ada galat pembulatan floating point.
 - Data awal (menu & harga) mengacu pada Lampiran A PRD dan bersifat contoh — silakan sesuaikan.
-# magezz-coffee
