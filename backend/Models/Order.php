@@ -2,6 +2,12 @@
 
 namespace App\Models;
 
+/**
+ * Model Eloquent - Order (Backend).
+ * Merepresentasikan tabel orders. Berisi relasi ke User, OrderItem,
+ * Transaction, serta konstanta status pesanan.
+ */
+
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

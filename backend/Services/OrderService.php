@@ -2,6 +2,12 @@
 
 namespace App\Services;
 
+/**
+ * Service Layer - Logika bisnis pesanan (Backend).
+ * Menangani pembuatan pesanan, update status, dan perhitungan
+ * yang kompleks agar Controller tetap ramping.
+ */
+
 use App\Models\Order;
 use App\Models\Setting;
 use Carbon\Carbon;

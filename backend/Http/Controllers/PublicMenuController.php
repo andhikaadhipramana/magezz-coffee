@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+/**
+ * Controller Frontend-Pelanggan - Katalog Menu.
+ * Menampilkan daftar menu publik, detail, dan filter kategori.
+ * View: frontend/views/public/*
+ */
+
 use App\Models\Category;
 use App\Models\Menu;
 use App\Models\Setting;

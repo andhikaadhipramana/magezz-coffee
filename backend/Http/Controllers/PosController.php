@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+/**
+ * Controller Backend-Kasir - Point of Sale (POS).
+ * Mengelola transaksi penjualan di kasir, keranjang POS,
+ * dan pembentukan transaksi. Hanya untuk role kasir/manager.
+ */
+
 use App\Models\Category;
 use App\Models\Menu;
 use App\Models\Order;
